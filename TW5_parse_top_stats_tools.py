@@ -2516,9 +2516,10 @@ def collect_stat_data(args, config, log, anonymize=False):
 								RelicDataSkills[player_name_prof][skill_name] = {stat: item[stat] for stat in item}
 							else:
 								for stat in item:
-									if stat == 'downContribution':
-										continue
-									RelicDataSkills[player_name_prof][skill_name][stat] += item[stat]
+									if stat not in RelicDataSkills[player_name_prof][skill_name]:
+										RelicDataSkills[player_name_prof][skill_name][stat] = item[stat]
+									else:
+										RelicDataSkills[player_name_prof][skill_name][stat] += item[stat]
 							for cast in player_data['rotation']:
 								if cast['id'] == skill_id:
 									if 'casts' not in RelicDataSkills[player_name_prof][skill_name]:
@@ -3943,7 +3944,10 @@ def get_stats_from_fight_json(fight_json, config, log):
 							battle_Standard[squadDps_prof_name][item]=skillData[item]
 					else:
 						for item in skillData:
+							if item not in battle_Standard[squadDps_prof_name]:
+								battle_Standard[squadDps_prof_name][item]=0
 							battle_Standard[squadDps_prof_name][item]+=skillData[item]
+
 
 		if 'rotation' in player:
 			squadDps_name = player['name']
