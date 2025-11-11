@@ -2516,6 +2516,8 @@ def collect_stat_data(args, config, log, anonymize=False):
 								RelicDataSkills[player_name_prof][skill_name] = {stat: item[stat] for stat in item}
 							else:
 								for stat in item:
+									if stat == 'downContribution':
+										continue
 									RelicDataSkills[player_name_prof][skill_name][stat] += item[stat]
 							for cast in player_data['rotation']:
 								if cast['id'] == skill_id:
