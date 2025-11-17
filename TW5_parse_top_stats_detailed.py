@@ -640,7 +640,7 @@ if __name__ == '__main__':
 		else:
 			continue
 		for relic in sortedUsedRelic:
-			if relic in RelicDataBuffs[player] and RelicDataBuffs[player][relic]['buffDuration']:
+			if relic in RelicDataBuffs[player] and RelicDataBuffs[player][relic]['buffDuration'] and sum(RelicDataBuffs[player][relic]['fightTime']):
 				numFights = "Fights: "+str(len(RelicDataBuffs[player][relic]['fightTime']))
 				totalUptime = (sum(RelicDataBuffs[player][relic]['buffDuration']) / sum(RelicDataBuffs[player][relic]['fightTime']))*100
 				avgStacks = "Average Stacks: "+str(round(sum(RelicDataBuffs[player][relic]['buffStacks'])/len(RelicDataBuffs[player][relic]['buffStacks']), 3))
